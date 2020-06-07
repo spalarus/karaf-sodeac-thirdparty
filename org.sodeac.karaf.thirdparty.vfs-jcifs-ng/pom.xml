@@ -66,6 +66,14 @@
             <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
 			<Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
             <Export-Package>net.idauto.oss.jcifsng.vfs2.provider</Export-Package>
+            <Import-Package>
+              jcifs;version="[2.0.4,3)", 	
+              jcifs.context;version="[2.0.4,3)", 	
+              jcifs.smb;version="[2.0.4,3)",
+              org.apache.commons.vfs2;version="[2.2,3)",	
+              org.apache.commons.vfs2.provider;version="[2.2,3)", 	
+              org.apache.commons.vfs2.util;version="[2.2,3)"
+            </Import-Package>
           </instructions>
           <source>1.8</source>
           <target>1.8</target>
