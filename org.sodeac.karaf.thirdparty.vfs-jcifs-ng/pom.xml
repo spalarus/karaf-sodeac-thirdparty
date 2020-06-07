@@ -4,7 +4,7 @@
     
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.sodeac</groupId>
-  <artifactId>org.sodeac.karaf.thirdparty.cfs-jcifs-ng</artifactId>
+  <artifactId>org.sodeac.karaf.thirdparty.vfs-jcifs-ng</artifactId>
   <version>1.0.1</version>
   <name>vfs-jcifs-ng</name>
   <packaging>bundle</packaging>
