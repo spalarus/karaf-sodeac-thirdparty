@@ -64,7 +64,8 @@
           <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
             <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
-			<Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
+            <Fragment-Host>org.apache.commons.vfs2</Fragment-Host>
             <Export-Package>net.idauto.oss.jcifsng.vfs2.provider</Export-Package>
             <Import-Package>
               jcifs;version="[2.0.4,3)", 	
