@@ -27,6 +27,12 @@
       <organizationUrl>http://www.identityautomation.com</organizationUrl>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/IdentityAutomation/vfs-jcifs-ng.git</connection>
+    <developerConnection>scm:git:https://github.com/IdentityAutomation/vfs-jcifs-ng.git</developerConnection>
+    <url>https://github.com/IdentityAutomation/vfs-jcifs-ng</url>
+  </scm>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
