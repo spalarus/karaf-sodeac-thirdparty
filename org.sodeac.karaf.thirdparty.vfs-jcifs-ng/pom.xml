@@ -6,10 +6,27 @@
   <groupId>org.sodeac</groupId>
   <artifactId>org.sodeac.karaf.thirdparty.vfs-jcifs-ng</artifactId>
   <version>1.0.1</version>
-  <name>vfs-jcifs-ng</name>
   <packaging>bundle</packaging>
-  
+	
+  <name>VFS JCIFS-NG Provider - OSGi Fragment</name>
+  <description>A jcifs-ng based file system provider for Apache Commons VFS</description>
   <url>https://github.com/IdentityAutomation/vfs-jcifs-ng</url>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Shon Vella</name>
+      <email>svella@idauto.net</email>
+      <organization>Identity Automation</organization>
+      <organizationUrl>http://www.identityautomation.com</organizationUrl>
+    </developer>
+  </developers>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
