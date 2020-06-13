@@ -5,12 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.sodeac</groupId>
   <artifactId>org.sodeac.karaf.thirdparty.jboss.marshalling</artifactId>
-  <version>2.0.9.Final</version>
-  <packaging>jar</packaging>
+  <version>2.0.9.Final_1</version>
+  <packaging>bundle</packaging>
 
   <name>JBoss Marshalling OSGi Bundle</name>
-  <description>JBoss Marshalling OSGi Bundled</description>
+  <description>JBoss Marshalling OSGi Bundle</description>
   <url>http://jboss.org/jbossmarshalling</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <bundle.version>2.0.9.Final</bundle.version>
+  </properties>
 
   <licenses>
     <license>
@@ -33,15 +38,11 @@
     <url>https://github.com/jboss-remoting/jboss-marshalling</url>
   </scm>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.jboss.marshalling</groupId>
       <artifactId>jboss-marshalling-osgi</artifactId>
-      <version>${version}</version>
+      <version>${bundle.version}</version>
     </dependency>
   </dependencies>
 
@@ -63,30 +64,37 @@
                   <include>org.jboss.marshalling:jboss-marshalling-osgi:jar:</include>
                 </includes>
               </artifactSet>
-              <filters>
-                <filter>
-                  <artifact>org.jboss.marshalling:jboss-marshalling-osgi</artifact>
-                  <excludes>
-                    <exclude>META-INF/MANIFEST.MF</exclude>
-                  </excludes>
-                </filter>
-              </filters>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                  <resource>META-INF/services/org.jboss.marshalling.ProviderDescriptor</resource>
-                </transformer>
-              </transformers>
             </configuration>
           </execution>
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>4.2.1</version>
         <configuration>
-          <archive>
-            <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-          </archive>
+          <instructions>
+          	<Bundle-SymbolicName>org.jboss.marshalling.jboss-marshalling-osgi</Bundle-SymbolicName>
+            <Bundle-Version>${bundle.version}</Bundle-Version>
+            <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
+            <Export-Package>
+            	org.jboss.marshalling;version="${bundle.version}";uses:="org.jboss.marshalling.reflect,org.jboss.modules",
+            	org.jboss.marshalling.cloner;version="${bundle.version}";uses:="org.jboss.marshalling",
+				org.jboss.marshalling.reflect;version="${bundle.version}";uses:="org.jboss.marshalling,org.jboss.marshalling.util",
+				org.jboss.marshalling.river;version="${bundle.version}";uses:="org.jboss.marshalling,org.jboss.marshalling.util",
+				org.jboss.marshalling.serial;version="${bundle.version}";uses:="org.jboss.marshalling,org.jboss.marshalling.util",
+				org.jboss.marshalling.util;version="${bundle.version}";uses:="org.jboss.marshalling,org.jboss.marshalling.util"
+            </Export-Package>
+            <Import-Package>
+            	sun.misc;resolution:=optional,
+            	sun.reflect;resolution:=optional,
+            	org.jboss.modules;resolution:=optional
+            </Import-Package>
+          </instructions>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>

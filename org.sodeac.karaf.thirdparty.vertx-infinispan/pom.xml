@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.sodeac</groupId>
+  <artifactId>org.sodeac.karaf.thirdparty.vertx-infinispan</artifactId>
+  <version>3.9.1_1</version>
+  <packaging>bundle</packaging>
+	
+  <name>Vert.x Infinispan Cluster Manager</name>
+  <description>Vert.x Infinispan Cluster Manager - Rebundled for OSGi</description>
+  
+  <url>http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-ext/vertx-ext-parent/org.sodeac.karaf.thirdparty.vertx-infinispan</url>
+  <organization>
+    <name>Eclipse</name>
+  </organization>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  
+  <developers>
+    <developer>
+      <name>Vert.X</name>
+    </developer>
+  </developers>
+  
+  <scm>
+    <connection>scm:git:git@github.com/vert-x3/vertx-infinispan.git</connection>
+    <developerConnection>scm:git:git@github.com/vert-x3/vertx-infinispan.git</developerConnection>
+    <url>git@github.com/vert-x3/vertx-infinispan.git</url>
+  </scm>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <bundle.version>3.9.1</bundle.version>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-infinispan</artifactId>
+      <version>${bundle.version}</version>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>io.vertx:vertx-infinispan:jar:</include>
+                </includes>
+              </artifactSet>
+              <filters>
+              	<filter>
+              		<artifact>org.infinispan:vertx-infinispan</artifact>
+              		<excludes>
+              			<exclude>META-INF/INDEX.LIST</exclude>
+              		</excludes>
+              	</filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>4.2.1</version>
+        <configuration>
+          <instructions>
+          	<Bundle-SymbolicName>io.vertx.ext.cluster.infinispan</Bundle-SymbolicName>
+            <Bundle-Version>${bundle.version}</Bundle-Version>
+            <Bundle-ActivationPolicy>lazy</Bundle-ActivationPolicy>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
+            <Export-Package>
+            	io.vertx.ext.cluster.infinispan;uses:="io.vertx.codegen.annotations,io.vertx.core,io.vertx.core.shareddata,io.vertx.core.spi.cluster,io.vertx.core.streams,io.vertx.ext.healthchecks, org.infinispan.commons.api, org.infinispan.manager";version=${bundle.version},
+            	io.vertx.ext.cluster.infinispan.impl;uses:="io.vertx.core,io.vertx.core.eventbus.impl.clustered,io.vertx.core.net.impl,io.vertx.core.shareddata,io.vertx.core.shareddata.impl,io.vertx.core.spi.cluster,io.vertx.core.streams,io.vertx.ext.cluster.infinispan,org.infinispan,org.infinispan.commons.marshall,org.infinispan.commons.util,org.infinispan.counter.api,org.infinispan.lock.api,org.infinispan.multimap.impl";version=${bundle.version}
+            </Export-Package>
+            <Import-Package>
+            	javax.xml.stream;resolution:=optional,
+            	org.infinispan;resolution:=optional,
+            	org.infinispan.configuration.global;resolution:=optional,
+            	org.infinispan.configuration.parsing;resolution:=optional,
+            	org.infinispan.context;resolution:=optional,
+            	org.infinispan.counter;resolution:=optional,
+            	org.infinispan.health;resolution:=optional,
+            	org.infinispan.lock;resolution:=optional,
+            	org.infinispan.lock.api;resolution:=optional,
+            	org.infinispan.lock.impl.manager;resolution:=optional,
+            	org.infinispan.manager;resolution:=optional,
+            	org.infinispan.metadata;resolution:=optional,
+            	org.infinispan.multimap.api.embedded;resolution:=optional,
+            	org.infinispan.multimap.impl;resolution:=optional,
+            	org.infinispan.notifications;resolution:=optional,
+            	org.infinispan.notifications.cachelistener.annotation;resolution:=optional,
+            	org.infinispan.notifications.cachelistener.event;resolution:=optional,
+            	org.infinispan.notifications.cachelistener.filter;resolution:=optional,
+            	org.infinispan.notifications.cachemanagerlistener.annotation;resolution:=optional,
+            	org.infinispan.notifications.cachemanagerlistener.event;resolution:=optional,
+            	org.infinispan.remoting.transport;resolution:=optional,
+            	org.infinispan.stream;resolution:=optional,
+            	org.infinispan.util.function;resolution:=optional
+            </Import-Package>
+          </instructions>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <profiles>
+	<profile>
+		<id>release-sign-deploy-artifacts</id>
+		<activation>
+			<property>
+				<name>performRelease</name>
+				<value>true</value>
+			</property>
+		</activation>
+		<distributionManagement>
+			<snapshotRepository>
+				<id>ossrh</id>
+				<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			</snapshotRepository>
+			<repository>
+				<id>ossrh</id>
+				<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			</repository>
+		</distributionManagement>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.6</version>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+							<configuration>
+								<keyname>${gpg.keyname}</keyname>
+								<passphraseServerId>${gpg.keyname}</passphraseServerId>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+  </profiles>
+  
+</project>
