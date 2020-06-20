@@ -117,6 +117,12 @@
             	org.infinispan.stream;resolution:=optional,
             	org.infinispan.util.function;resolution:=optional
             </Import-Package>
+            <!-- Require-Capability>
+            	osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
+            </Require-Capability>
+            <Provide-Capability>
+            	osgi.serviceloader; osgi.serviceloader=io.vertx.core.spi.cluster.ClusterManager
+            </Provide-Capability-->
           </instructions>
           <source>1.8</source>
           <target>1.8</target>
