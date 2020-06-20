@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<blueprint  default-activation="eager" 
+            xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<bean id="defaultdistributedtasklifecycle" class="org.infinispan.distexec.spi.DefaultDistributedTaskLifecycle" />
+	<service ref="defaultdistributedtasklifecycle" interface="org.infinispan.distexec.spi.DistributedTaskLifecycle" />
+	<bean id="parser" class="org.infinispan.configuration.parsing.Parser" />
+	<service ref="parser" interface="org.infinispan.configuration.parsing.ConfigurationParser" />
+	
+	<bean id="counterlifecyclemanager" class="org.infinispan.counter.impl.CounterModuleLifecycle" />
+	<service ref="counterlifecyclemanager" interface="org.infinispan.lifecycle.ModuleLifecycle" />
+	<bean id="counterconfigurationparser" class="org.infinispan.counter.configuration.CounterConfigurationParser" />
+	<service ref="counterconfigurationparser" interface="org.infinispan.configuration.parsing.ConfigurationParser" />
+	<bean id="countermetadatafilefinder" class="org.infinispan.counter.impl.CounterMetadataFileFinder" />
+	<service ref="countermetadatafilefinder" interface="org.infinispan.factories.components.ModuleMetadataFileFinder" />
+	
+	<bean id="locklifecyclemanager" class="org.infinispan.lock.impl.ClusteredLockModuleLifecycle" />
+	<service ref="locklifecyclemanager" interface="org.infinispan.lifecycle.ModuleLifecycle" />
+	<bean id="lockconfigurationparser" class="org.infinispan.lock.configuration.ClusteredLockConfigurationParser" />
+	<service ref="lockconfigurationparser" interface="org.infinispan.configuration.parsing.ConfigurationParser" />
+	<bean id="lockmetadatafilefinder" class="org.infinispan.lock.impl.ClusteredLockMetadataFileFinder" />
+	<service ref="lockmetadatafilefinder" interface="org.infinispan.factories.components.ModuleMetadataFileFinder" />
+	
+	<bean id="mmaplifecyclemanager" class="org.infinispan.multimap.impl.MultimapModuleLifecycle" />
+	<service ref="mmaplifecyclemanager" interface="org.infinispan.lifecycle.ModuleLifecycle" />
+	<bean id="mmapmetadatafilefinder" class="org.infinispan.multimap.impl.EmbeddedMultimapMetadataFileFinder" />
+	<service ref="mmapmetadatafilefinder" interface="org.infinispan.factories.components.ModuleMetadataFileFinder" />
+	
+	<bean id="jdbcstoreconfigurationparser" class="org.infinispan.persistence.jdbc.configuration.JdbcStoreConfigurationParser" />
+	<service ref="jdbcstoreconfigurationparser" interface="org.infinispan.configuration.parsing.ConfigurationParser" />
+	
+	<bean id="jpastorelifecyclemanager" class="org.infinispan.persistence.jpa.impl.JpaStoreLifecycleManager" />
+	<service ref="jpastorelifecyclemanager" interface="org.infinispan.lifecycle.ModuleLifecycle" />
+	<bean id="jpastoreconfigurationparser" class="org.infinispan.persistence.jpa.configuration.JpaStoreConfigurationParser" />
+	<service ref="jpastoreconfigurationparser" interface="org.infinispan.configuration.parsing.ConfigurationParser" />
+	
+	<bean id="lifecyclecallbacks" class="org.infinispan.jcache.embedded.LifecycleCallbacks" />
+	<service ref="lifecyclecallbacks" interface="org.infinispan.lifecycle.ModuleLifecycle" />
+	<bean id="annotationinjectextension" class="org.infinispan.jcache.annotation.AnnotationInjectExtension" />
+	<service ref="annotationinjectextension" interface="javax.enterprise.inject.spi.Extension" />
+	<bean id="jcachingprovider" class="org.infinispan.jcache.embedded.JCachingProvider" />
+	<service ref="jcachingprovider" interface="javax.cache.spi.CachingProvider" />
+
+</blueprint>
