@@ -98,23 +98,16 @@
             	io.vertx.servicediscovery.utils;version=${bundle.version},
             </Export-Package>
             <Import-Package>
-            	javax.xml.stream;resolution:=optional,
-            	io.vertx.codegen.annotations;resolution:=optional,
-            	io.vertx.core;resolution:=optional,	
-            	io.vertx.core.eventbus;resolution:=optional,
-            	io.vertx.core.http;resolution:=optional,
-            	io.vertx.core.impl;resolution:=optional,
-            	io.vertx.core.json;resolution:=optional,	
-            	io.vertx.core.logging;resolution:=optional,
-            	io.vertx.core.shareddata;resolution:=optional,
-            	io.vertx.ext.jdbc;resolution:=optional,
-            	io.vertx.ext.web;resolution:=optional,
-            	io.vertx.ext.web.handler;resolution:=optional,
-            	io.vertx.ext.mongo;resolution:=optional,
-            	io.vertx.ext.web.client;resolution:=optional,
-            	io.vertx.redis;resolution:=optional,
-            	io.vertx.serviceproxy;resolution:=optional
+            	io.vertx.ext.jdbc*;resolution:=optional,
+            	io.vertx.ext.web*;resolution:=optional,
+            	io.vertx.ext.mongo*;resolution:=optional,
+            	io.vertx.redis*;resolution:=optional,
+            	io.vertx.serviceproxy*;resolution:=optional,
+            	*
             </Import-Package>
+            <Private-Package>
+            	io.vertx.servicediscovery*
+            </Private-Package>
           </instructions>
           <source>1.8</source>
           <target>1.8</target>
