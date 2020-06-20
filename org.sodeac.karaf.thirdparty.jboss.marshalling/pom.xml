@@ -92,6 +92,9 @@
             	sun.reflect;resolution:=optional,
             	org.jboss.modules;resolution:=optional
             </Import-Package>
+            <!--Require-Capability>
+            	osgi.serviceloader; filter:="(osgi.serviceloader=org.jboss.marshalling.ProviderDescriptor)";cardinality:=multiple,osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)"
+            </Require-Capability-->
           </instructions>
           <source>1.8</source>
           <target>1.8</target>
